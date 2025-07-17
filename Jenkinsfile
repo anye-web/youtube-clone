@@ -70,7 +70,7 @@ pipeline{
 
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name youtube-clone -p 3000:3000 janohjr/youtube-clone:latest'
+                sh 'docker run -d --name youtube-clone-v2 -p 3000:3000 janohjr/youtube-clone:latest'
             }
         }
 
