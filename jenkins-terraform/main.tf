@@ -42,7 +42,7 @@ resource "aws_security_group" "youtube_sg" {
   
 
   ingress = [ 
-    for port in [22, 80, 443, 8080, 3000] : {
+    for port in [22, 80, 443, 8080, 3000, 9000] : {
         description  = "Allow inbound traffic"
         from_port    = port
         to_port      = port
