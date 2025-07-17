@@ -81,6 +81,18 @@ pipeline{
         }
 
     }
+
+    post{
+        success {
+            slackSend(channel: '#devopps', color: 'good', message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) was successful."  )
+        }
+        failure {
+            slackSend(channel: '#devopps', color: 'danger', message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed."  )
+        }
+        always {
+            echo 'build finished, check slack for notifications.'
+        }
+    }
 }
 
 // squ_d2e0afa4d194e616466aff63ccd6cdc4674b9e5b
