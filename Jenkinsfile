@@ -23,27 +23,6 @@ pipeline{
             }
         }
 
-        stage('Sonarqube Analysis'){
-            steps{
-                withSonarQubeEnv('sonar-server'){
-                    sh '''
-                         $SCANNER_HOME/bin/sonar-scanner \
-                            -Dsonar.projectKey=youtube-clone \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=http://34.207.89.7:9000 \
-                            -Dsonar.login=sqp_b37b0d37604da9701248d2b14c9b5bfb209ce98f
-                    '''
-                }
-            }
-        }
-
-        stage('Quality Gate'){
-            steps{
-                script{
-                    waitForQualityGate abortPipline: false, credentialsId: 'sonar-token'
-                }
-            }
-        }
 
         stage('Install Dependencies'){
             steps{
@@ -57,7 +36,7 @@ pipeline{
                             -o './'
                             -s './'
                             -f 'ALL' 
-                            --prettyPrint''', odcInstallation: 'OWASP Dependency-Check'
+                            --prettyPrint''', odcInstallation: 'DP-Check'
                 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
