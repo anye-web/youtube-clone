@@ -27,7 +27,7 @@ pipeline{
                             -Dsonar.projectKey=youtube-clone \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://34.207.89.7:9000 \
-                            -Dsonar.token=sqp_ef9ca55b74399574a602840c98ca89df718a6658   
+                            -Dsonar.login=sqp_b37b0d37604da9701248d2b14c9b5bfb209ce98f
                     '''
                 }
             }
