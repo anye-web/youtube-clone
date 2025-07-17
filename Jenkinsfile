@@ -23,7 +23,7 @@ pipeline{
             steps{
                 withSonarQubeEnv('sonar-server'){
                     sh '''
-                        sonar-scanner \
+                         $SCANNER_HOME/bin/sonar-scanner \
                             -Dsonar.projectKey=youtube-clone \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://34.207.89.7:9000 \
