@@ -69,21 +69,20 @@ resource "aws_security_group" "youtube_sg" {
 }
 
 # Creating Ec2 instance
+resource "aws_instance" "youtube" {
+  ami                    = "ami-020cba7c55df1f615"
+  instance_type          = "t2.large"
+  key_name               = "demo-001"
+  vpc_security_group_ids = [aws_security_group.youtube_sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.youtube_profile.name
 
-resource "aws_instance" "youtube_ec2" {
-    ami                       = "ami-03f4878755434977f"
-    key_name                  = "demo-001"
-    instance_type             = "t2.large"
-    vpc_security_group_ids    = [aws_security_group.youtube_sg.id]
-    user_data                 = templatefile("./install_jenkins.sh", {})
-    iam_instance_profile      = aws_iam_instance_profile.youtube_profile.name
+  user_data              = templatefile("./install_jenkins.sh", {})
 
+  tags = {
+    Name = "youtube server"
+  }
 
-    tags = {
-        name = "youtube server"
-    } 
-
-    root_block_device {
-        volume_size = 30
-    }
+  root_block_device {
+    volume_size = 30
+  }
 }
